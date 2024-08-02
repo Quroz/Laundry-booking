@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <Text>Page</Text>
     </View>
   );
