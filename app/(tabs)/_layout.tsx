@@ -1,37 +1,61 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabsLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    <Tabs>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          tabBarLabel: "Home",
+          tabBarLabelStyle: { color: "black" },
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="home" size={24} color="#7cb9e8" />
+            ) : (
+              <Ionicons name="home-outline" size={24} color="black" />
+            ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="basket"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          tabBarLabel: "Basket",
+          tabBarLabelStyle: { color: "black" },
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="basket-outline" size={24} color="#7cb9e8" />
+            ) : (
+              <Ionicons name="basket-outline" size={24} color="black" />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="orders"
+        options={{
+          tabBarLabel: "Orders",
+          tabBarLabelStyle: { color: "black" },
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <MaterialCommunityIcons
+                name="account-details"
+                size={24}
+                color="#7cb9e8"
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="account-details"
+                size={24}
+                color="black"
+              />
+            ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabsLayout;
