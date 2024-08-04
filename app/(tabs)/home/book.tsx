@@ -1,4 +1,5 @@
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -17,7 +18,7 @@ const book = () => {
   const [selectedDate, setSelectedDate] = useState(moment());
   const [selectedTime, setSelectedTime] = useState({});
 
-  console.log("Selected", selectedTime);
+  console.log("Selected", selectedDate);
 
   const pickupTimeOptions = [
     { startTime: "6:30 AM", endTime: "9:00 AM" },
@@ -27,7 +28,7 @@ const book = () => {
   ];
 
   const renderTime = () => {
-    const currentTime = moment(); // Hämta aktuell tid som ett moment-objekt
+    const currentTime = moment();
 
     return pickupTimeOptions.map((time, index) => {
       const startTime = moment(time.startTime, "h:mm A");
@@ -259,6 +260,8 @@ const book = () => {
             </View>
           </View>
         )}
+
+        {step === 2 && <View></View>}
       </View>
 
       <View
@@ -294,8 +297,13 @@ const book = () => {
             borderRadius: 10,
           }}
           onPress={() => {
-            if (step < 5) setStep((prevStep) => prevStep + 1);
-            else return;
+            if (step < 5) {
+              if (step == 1 && Object.keys(selectedTime).length === 0) {
+                Alert.alert("Please fill in your pick up time!");
+              } else {
+                setStep((prevStep) => prevStep + 1);
+              }
+            } else return;
           }}
           disabled={step === 5}
         >
